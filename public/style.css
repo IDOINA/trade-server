@@ -1,0 +1,169 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f0f0f;
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+header {
+  background: #1a1a2e;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e94560;
+}
+
+header h1 {
+  color: #e94560;
+  font-size: 1.5rem;
+}
+
+#auth-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#auth-area .user-tag {
+  color: #16c79a;
+  font-weight: 600;
+}
+
+main {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background: #1a1a2e;
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid #2a2a4a;
+}
+
+.card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #2a2a4a;
+  border-radius: 6px;
+  background: #0f0f1a;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #e94560;
+}
+
+textarea { resize: vertical; min-height: 60px; }
+
+button {
+  padding: 0.55rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+
+button:hover { opacity: 0.85; }
+
+.btn-row { display: flex; gap: 0.5rem; }
+
+button[data-action="login"],
+#trade-form button,
+button.close-btn {
+  background: #e94560;
+  color: #fff;
+}
+
+button[data-action="register"] {
+  background: #2a2a4a;
+  color: #ccc;
+}
+
+button.logout-btn {
+  background: #2a2a4a;
+  color: #ccc;
+  font-size: 0.8rem;
+}
+
+button.status-btn {
+  background: #2a2a4a;
+  color: #ccc;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.error { color: #e94560; margin-top: 0.5rem; font-size: 0.85rem; }
+.muted { color: #666; font-size: 0.9rem; }
+
+.trade-item {
+  border-bottom: 1px solid #2a2a4a;
+  padding: 1rem 0;
+}
+
+.trade-item:last-child { border-bottom: none; }
+
+.trade-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.trade-user { color: #16c79a; font-weight: 600; font-size: 0.9rem; }
+.trade-time { color: #555; font-size: 0.75rem; }
+
+.trade-offer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.trade-offer .label { color: #888; font-size: 0.8rem; min-width: 45px; }
+.trade-offer .arrow { color: #e94560; }
+
+.trade-details {
+  color: #999;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+.trade-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.status {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-open { background: #16c79a22; color: #16c79a; }
+.status-closed { background: #e9456022; color: #e94560; }
+.status-completed { background: #f5a62322; color: #f5a623; }

@@ -1,0 +1,7 @@
+node_modules/
+trades.db
+trades.db-shm
+trades.db-wal
+.env
+start-trade-server.vbs
+.claude/

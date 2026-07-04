@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trade Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Trade Board</h1>
+    <div id="auth-area"></div>
+  </header>
+
+  <main>
+    <section id="login-section" class="card">
+      <h2>Log In / Register</h2>
+      <form id="auth-form">
+        <input type="text" id="username" placeholder="Username" required minlength="3" maxlength="20">
+        <input type="password" id="password" placeholder="Password" required minlength="4">
+        <div class="btn-row">
+          <button type="submit" data-action="login">Log In</button>
+          <button type="button" onclick="doAuth('register')">Register</button>
+        </div>
+        <p id="auth-error" class="error"></p>
+      </form>
+    </section>
+
+    <section id="new-trade-section" class="card" hidden>
+      <h2>Post a Trade</h2>
+      <form id="trade-form">
+        <input type="text" id="offering" placeholder="What you're offering" required maxlength="200">
+        <input type="text" id="wanting" placeholder="What you want" required maxlength="200">
+        <textarea id="details" placeholder="Extra details (optional)" maxlength="500"></textarea>
+        <button type="submit">Post Trade</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>All Trades</h2>
+      <div id="trades-list"><p class="muted">Loading...</p></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
