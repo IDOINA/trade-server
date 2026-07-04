@@ -8,39 +8,139 @@
 </head>
 <body>
   <header>
-    <h1>Trade Board</h1>
+    <h1 onclick="navigate('trades')">Trade Board</h1>
     <div id="auth-area"></div>
   </header>
 
+  <nav id="main-nav" hidden>
+    <button class="nav-btn active" data-page="trades">Trades</button>
+    <button class="nav-btn" data-page="create">New Trade</button>
+    <button class="nav-btn" data-page="inbox">Messages</button>
+    <button class="nav-btn" data-page="report">Report</button>
+  </nav>
+
   <main>
-    <section id="login-section" class="card">
-      <h2>Log In / Register</h2>
-      <form id="auth-form">
-        <input type="text" id="username" placeholder="Username" required minlength="3" maxlength="20">
-        <input type="password" id="password" placeholder="Password" required minlength="4">
-        <div class="btn-row">
-          <button type="submit" data-action="login">Log In</button>
-          <button type="button" onclick="doAuth('register')">Register</button>
-        </div>
-        <p id="auth-error" class="error"></p>
+    <!-- Login/Register -->
+    <section id="page-auth" class="card">
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Log In</button>
+        <button class="auth-tab" data-tab="register">Register</button>
+      </div>
+      <form id="login-form">
+        <input type="text" id="login-user" placeholder="Username" required>
+        <input type="password" id="login-pass" placeholder="Password" required>
+        <button type="submit">Log In</button>
       </form>
+      <form id="register-form" hidden>
+        <input type="text" id="reg-user" placeholder="Username (3-20 chars)" required minlength="3" maxlength="20">
+        <input type="email" id="reg-email" placeholder="Email" required>
+        <input type="password" id="reg-pass" placeholder="Password (8+ chars)" required minlength="8">
+        <div id="pw-strength"><div id="pw-bar"></div></div>
+        <p id="pw-text"></p>
+        <button type="submit">Register</button>
+      </form>
+      <p id="auth-error" class="error"></p>
     </section>
 
-    <section id="new-trade-section" class="card" hidden>
-      <h2>Post a Trade</h2>
+    <!-- Trade Feed -->
+    <section id="page-trades" hidden>
+      <div class="feed-controls">
+        <input type="text" id="search-input" placeholder="Search trades...">
+        <select id="cat-filter">
+          <option value="all">All Categories</option>
+          <option value="seeds">Seeds</option>
+          <option value="plants">Plants</option>
+          <option value="gear">Gear</option>
+          <option value="pets">Pets</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div id="trades-list"><p class="muted">Loading...</p></div>
+    </section>
+
+    <!-- Create Trade -->
+    <section id="page-create" class="card" hidden>
+      <h2>New Trade</h2>
       <form id="trade-form">
-        <input type="text" id="offering" placeholder="What you're offering" required maxlength="200">
-        <input type="text" id="wanting" placeholder="What you want" required maxlength="200">
-        <textarea id="details" placeholder="Extra details (optional)" maxlength="500"></textarea>
+        <label>Category</label>
+        <select id="trade-cat">
+          <option value="seeds">Seeds</option>
+          <option value="plants">Plants</option>
+          <option value="gear">Gear</option>
+          <option value="pets">Pets</option>
+          <option value="other">Other</option>
+        </select>
+        <label>What you're offering</label>
+        <div class="preset-row">
+          <input type="text" id="trade-offering" placeholder="Type or pick preset" required maxlength="200">
+          <button type="button" class="sm-btn" onclick="openPresetPicker('offering')">Presets</button>
+        </div>
+        <label>What you want</label>
+        <div class="preset-row">
+          <input type="text" id="trade-wanting" placeholder="Type or pick preset" required maxlength="200">
+          <button type="button" class="sm-btn" onclick="openPresetPicker('wanting')">Presets</button>
+        </div>
+        <label>Details (optional)</label>
+        <textarea id="trade-details" placeholder="Extra info..." maxlength="500"></textarea>
+        <label>Image (optional)</label>
+        <input type="file" id="trade-image" accept="image/*">
+        <div id="trade-img-preview"></div>
         <button type="submit">Post Trade</button>
       </form>
     </section>
 
-    <section class="card">
-      <h2>All Trades</h2>
-      <div id="trades-list"><p class="muted">Loading...</p></div>
+    <!-- Trade Detail -->
+    <section id="page-trade-detail" class="card" hidden>
+      <div id="trade-detail-content"></div>
+      <div id="trade-messages">
+        <h3>Messages</h3>
+        <div id="msg-list"></div>
+        <form id="msg-form">
+          <div class="msg-input-row">
+            <input type="text" id="msg-input" placeholder="Send a message..." maxlength="1000">
+            <button type="submit">Send</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Inbox -->
+    <section id="page-inbox" hidden>
+      <h2>Messages</h2>
+      <div id="inbox-list"><p class="muted">Loading...</p></div>
+    </section>
+
+    <!-- User Profile -->
+    <section id="page-profile" hidden>
+      <div id="profile-content"></div>
+    </section>
+
+    <!-- Report -->
+    <section id="page-report" class="card" hidden>
+      <h2>Report a Scammer</h2>
+      <form id="report-form">
+        <input type="text" id="report-user" placeholder="Username to report" required>
+        <input type="text" id="report-trade-id" placeholder="Trade ID (optional)">
+        <textarea id="report-reason" placeholder="What happened?" required maxlength="1000"></textarea>
+        <input type="text" id="report-evidence-url" placeholder="Video proof link (YouTube, etc.)">
+        <label>Screenshot proof (optional)</label>
+        <input type="file" id="report-image" accept="image/*">
+        <button type="submit">Submit Report</button>
+      </form>
     </section>
   </main>
+
+  <!-- Preset Picker Modal -->
+  <div id="preset-modal" class="modal" hidden>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Pick an Item</h3>
+        <button class="close-modal" onclick="closePresetModal()">&times;</button>
+      </div>
+      <div class="preset-tabs" id="preset-tabs"></div>
+      <div id="preset-items"></div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
