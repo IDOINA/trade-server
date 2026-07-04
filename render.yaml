@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: trade-server
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_AUTH_TOKEN
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
